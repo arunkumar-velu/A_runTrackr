@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Google Maps Example</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <style>
+      html, body, #map-canvas {
+        height: 700px;
+        margin: 0px;
+        padding: 0px;
+
+      }
+      
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <h1>A_run Trackr</h1><h4 class="user"></h4>
+      <select id="username"> 
+        <option>...</option>
+      </select>
+    </div>
+    <div>Select user u need to track</div>
+    <div class= "map-container">
+      <div id="map-canvas"></div>
+    </div>
+    
+    <!-- Map Configuration and data -->
+    <script src="js/main.js">
+    
+    </script>
+
+    <br>
+    
+  </body>
+</html>
