@@ -71,7 +71,7 @@ var app = {
                 lng = position.coords["longitude"];
                 console.log(lat,lng)
                 // calls PubNub
-
+                alert(lat,lng)
                 // initialize google maps
                 google.maps.event.addDomListener(window, 'load', initialize());
             },
