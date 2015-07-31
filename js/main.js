@@ -2,14 +2,53 @@
 var socket = io();
 
 (function(){
-    var map;
+var map;
     var map_marker;
     var lat = null;
     var lng = null;
     var lineCoordinatesArray = [];
+///////////////////////////////////////////////////////////
 
+var app = {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
 
-    var person = prompt("Please enter your name", "");
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        var map;
+        // function initialize() {
+        // var mapOptions = {
+        // zoom: 8,
+        // center: new google.maps.LatLng(-34.397, 150.644)
+        // };
+        // map = new google.maps.Map(document.getElementById('map-canvas'),
+        // mapOptions);
+        // }
+
+        var person = prompt("Please enter your name", "");
     if (person != null) {
        socket.emit("addUser",person);
        $(".user").html(person);
@@ -116,6 +155,23 @@ var socket = io();
       $(".map-container").show();
 
     })
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    }
+};
+
+app.initialize();
+
+       
+
+
+///////////////////////////////////////////////////////////
+
+    
+
+
+    
 
     
 })();
