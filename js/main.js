@@ -58,7 +58,7 @@ var app = {
         }
 
         // sets your location as default
-        alert(navigator.geolocation)
+        alert(navigator.geolocation.getCurrentPosition())
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) { 
                 var locationMarker = null;
