@@ -179,7 +179,7 @@ app.initialize();
         //alert(navigator.geolocation)
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) { 
-               alert(navigator.geolocation.getCurrentPosition())
+              // alert(navigator.geolocation.getCurrentPosition())
                 var locationMarker = null;
                 if (locationMarker){
                     // return if there is a locationMarker bug
