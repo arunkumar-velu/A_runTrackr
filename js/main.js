@@ -60,8 +60,9 @@ var app = {
         // sets your location as default
         
         if (navigator.geolocation) {
-          alert(navigator.geolocation.getCurrentPosition())
+          //alert(navigator.geolocation.getCurrentPosition())
             navigator.geolocation.getCurrentPosition(function(position) { 
+              alert("hello")
                 var locationMarker = null;
                 if (locationMarker){
                     // return if there is a locationMarker bug
