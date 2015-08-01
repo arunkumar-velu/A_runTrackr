@@ -188,7 +188,10 @@ app.initialize();
 
                 lat = position.coords["latitude"];
                 lng = position.coords["longitude"];
-                console.log(lat,lng)
+                console.log(lat,lng);
+                 alert('Latitude: '          + position.coords["latitude"]          + '\n' +
+          'Longitude: '         + position.coords["longitude"]    )
+
                 // calls PubNub
 
                 // initialize google maps
