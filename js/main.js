@@ -58,7 +58,7 @@ var app = {
         }
 
         // sets your location as default
-        
+         alert("hellooooooooooqqqqqqqkkkk");
         if (navigator.geolocation) {
               alert("hellooooooooooqqqqqqq")
 
