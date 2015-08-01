@@ -62,12 +62,14 @@ var app = {
         if (navigator.geolocation) {
           //alert(navigator.geolocation.getCurrentPosition())
             navigator.geolocation.getCurrentPosition(function(position) { 
-              alert("hello")
+              
                 var locationMarker = null;
                 if (locationMarker){
                     // return if there is a locationMarker bug
                     return;
                 }
+                 alert('Latitude: '          + position.coords["latitude"]          + '\n' +
+          'Longitude: '         + position.coords["longitude"]    )
 
                 lat = position.coords["latitude"];
                 lng = position.coords["longitude"];
@@ -78,6 +80,7 @@ var app = {
                 google.maps.event.addDomListener(window, 'load', initialize());
             },
             function(error) {
+              alert(error)
                 console.log("Error: ", error);
             },
             {
