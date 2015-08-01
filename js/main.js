@@ -58,8 +58,9 @@ var app = {
         }
 
         // sets your location as default
-        alert(navigator.geolocation.getCurrentPosition())
+        
         if (navigator.geolocation) {
+          alert(navigator.geolocation.getCurrentPosition())
             navigator.geolocation.getCurrentPosition(function(position) { 
                 var locationMarker = null;
                 if (locationMarker){
@@ -171,9 +172,10 @@ app.initialize();
         }
 
         // sets your location as default
-        alert(navigator.geolocation)
+        //alert(navigator.geolocation)
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) { 
+               alert(navigator.geolocation.getCurrentPosition())
                 var locationMarker = null;
                 if (locationMarker){
                     // return if there is a locationMarker bug
