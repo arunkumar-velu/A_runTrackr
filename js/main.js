@@ -54,11 +54,13 @@ var app = {
         var person = prompt("Please enter your name", "");
         if (person != null) {
             socket.emit("addUser",person);
+             alert("hellooooooooooqqqqqqqkkkk");
             $(".user").html(person);
+             alert("hellooooooooooqqqqqqqkkkk");
         }
 
         // sets your location as default
-         alert("hellooooooooooqqqqqqqkkkk");
+        
         if (navigator.geolocation) {
               alert("hellooooooooooqqqqqqq")
 
