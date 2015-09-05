@@ -5,10 +5,10 @@ var io = require('socket.io')(http);
 var user = []
 
 app.get('/', function(req, res){
-   res.sendFile(__dirname + '/view/index.html');
+   res.sendFile(__dirname + '/public/view/index.html');
 });
 app.set('port', (process.env.PORT || 5000));
-app.use("/js", express.static(__dirname + '/js'));
+app.use("/js", express.static(__dirname + '/public/js'));
 //var nsp = io.of('/a_runTrackr');
 io.on('connection', function (socket) {
 		//socket.join('track room');
@@ -38,5 +38,5 @@ io.on('connection', function (socket) {
 });
 
 http.listen(app.get('port'), function(){
-  console.log('listening on *:3000');
+  console.log('listening on *:5000 ||',app.get('port'));
 });
