@@ -6,6 +6,7 @@
     "express": "^4.10.2",
     "socket.io": "^1.2.1",
     "body-parser": "~1.13.3",
-    "mongodb": "~2.0.42"
+    "mongodb": "~2.0.42",
+    "jade": "~1.11.0"
   }
 }
