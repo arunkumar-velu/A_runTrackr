@@ -1,12 +1,26 @@
 {
-  "name": "socket-chat-example",
-  "version": "0.0.1",
-  "description": "my first socket.io app",
-  "dependencies": {
-    "express": "^4.10.2",
-    "socket.io": "^1.2.1",
-    "body-parser": "~1.13.3",
-    "mongodb": "~2.0.42",
-    "jade": "~1.11.0"
-  }
+    "name": "A_runTrackr",
+    "version": "1.0.0",
+    "description": "my first socket.io app",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    },
+    "keywords": [
+        "example",
+        "heroku"
+    ],
+    "engines": {
+        "node": "0.10.30"
+    },
+    "dependencies": {
+        "express": "^4.10.2",
+        "socket.io": "^1.2.1",
+        "body-parser": "~1.13.3",
+        "mongodb": "~2.0.42",
+        "jade": "~1.11.0"
+    },
+    "author": "Arun",
+    "license": "MIT"
 }
