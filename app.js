@@ -24,7 +24,7 @@ app.use("/js", express.static(__dirname + '/public/js'));
 
 
 // Connection URL. This is where your mongodb server is running.
-var url = 'mongodb://arunmadcoder:test@ds035503.mongolab.com:35503/a_run_trackr';
+var url = process.env.MONGOHQ_URL;
 
 db.connect(url, function(err) {
   if (err) {
