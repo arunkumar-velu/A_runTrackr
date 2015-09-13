@@ -8,27 +8,26 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
-    <style>
-      html, body, #map-canvas {
-        height: 700px;
-        margin: 0px;
-        padding: 0px;
-
-      }
-      
-    </style>
-
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrg5FODahC0GtfKavkdkpKS8pLR3I8yog"></script>
   </head>
   <body>
     <div class="container">
-      <h1>A_run Trackr</h1><h4 class="user"></h4>
-      <select id="username"> 
-        <option>...</option>
-      </select>
+      <div class="a-title">
+       <h1>A_run Trackr</h1>
+      </div>
+      <div class = "a-header">
+        <div>
+          <h4 class="user"></h4>
+        </div>
+        <div>
+          <p>Select user u need to track</p>
+          <select id="username"> 
+            <option>...</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <div>Select user u need to track</div>
     <div class= "map-container">
       <div id="map-canvas"></div>test
     </div>

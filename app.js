@@ -21,10 +21,11 @@ app.get('/', function(req, res){
 });
 app.set('port', (process.env.PORT || 5000));
 app.use("/js", express.static(__dirname + '/public/js'));
+app.use("/css", express.static(__dirname + '/public/css'));
 
 
 // Connection URL. This is where your mongodb server is running.
-var url = process.env.MONGOHQ_URL;
+var url = 'mongodb://arunmadcoder:test@ds035503.mongolab.com:35503/a_run_trackr';
 
 db.connect(url, function(err) {
   if (err) {

@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
- var socket = io.connect("http://a-runtrackr.herokuapp.com");
+var socket = io.connect("http://a-runtrackr.herokuapp.com");
 var map;
     var map_marker;
     var lat = null;
@@ -45,11 +45,27 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
-        var person = prompt("Please enter your name", "");
-        if (person != null) {
-            socket.emit("addUser",person);
-            $(".user").html(person);
-        }
+        var person = prompt("Please enter mail id", "");
+                if (person != null) {
+                    socket.emit("addUser",person);
+                    $(".user").html(person);
+                    var result = person.split("@")
+                     var val = {name: result[0],email: person};
+                    $.ajax({
+                      method: "POST",
+                      dataType:"json",
+                      contentType: "application/json; charset=utf-8",
+                      url: "http://a-runtrackr.herokuapp.com/users",
+                      jsonpCallback : "callback",
+                      data: JSON.stringify(val)
+                    })
+                      .done(function( result ) {
+                        var room = result.data.email;
+                        window.currentRoom = room;
+                        socket.emit("join room",room);
+                        console.log( "Data Saved" );
+                      });
+                }
 
         // sets your location as default
         
@@ -103,17 +119,34 @@ var app = {
           map_marker_from.setMap(map);
           map_marker_to.setMap(map);
            //$(".map-container").hide();
-           google.maps.event.addListener(map, 'click', function(event) {
-            //marker = new google.maps.Marker({position: event.latLng, map: map});
-            //redraw(event.latLng);
-          lat =  event.latLng.lat();
-          lng =  event.latLng.lng();
-          var latLng = {
-            lat : lat,
-            lng : lng
-          }
-            socket.emit('move', latLng);
-          });
+
+           // ###### Watch #####
+
+           function onSuccess(position) {
+               lat =  position.coords.latitude ;
+                         lng =  position.coords.longitude;
+                         var moveData = {
+                                     latLng : {
+                                       lat : lat,
+                                       lng : lng
+                                     },
+                                     room : window.currentRoom
+                                   }
+                                   console.log(window.currentRoom)
+                                     socket.emit('move', moveData);
+           }
+
+
+           function onError(error) {
+               alert('code: '    + error.code    + '\n' +
+                     'message: ' + error.message + '\n');
+           }
+
+
+           var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+
+
+           //#### end ######
         }
 
           // moves the marker and center of map
@@ -145,25 +178,30 @@ var app = {
     
 
     socket.on("move", function(latLng){
-      redraw(latLng);
+       redraw(latLng.latLng);
     });
     socket.on("updateUser", function(user){
-      console.log("user",user)
-      $("#username").empty();
-      $("#username").append(" <option>...</option>");
-      $.each(user,function(index,val){
-        $("#username").append("<option value='"+val.socketId+"'>"+val.name+"</option>")
-      })
-    });
+          console.log("user",user)
+          $("#username").empty();
+          $("#username").append(" <option>...</option>");
+          $.each(user,function(index,val){
+            console.log("user",val)
+            $("#username").append("<option value='"+val.email+"'>"+val.name+"</option>")
+          })
+        });
 
-    $("#username").change(function(e){
-      var selectedUser = $("#username option:selected").val();
-      var selectedUserName = $("#username option:selected").text();
-      socket.emit("selected user",selectedUser)
-      $(".user").append(" tracks "+ selectedUserName);
-      $(".map-container").show();
+        $("#username").change(function(e){
+          var selectedUser = $("#username option:selected").val();
+          var selectedUserName = $("#username option:selected").text();
+            $(this).data("old", $(this).data("new") || "");
+            $(this).data("new", $(this).val());
+            console.log($(this).data("old"),$(this).data("new"))
+            socket.emit("leave room",$(this).data("old"));
+            socket.emit("join room",$(this).data("new"));
+          $(".user").append(" tracks "+ selectedUserName);
+          $(".map-container").show();
 
-    })
+        })
 
         //google.maps.event.addDomListener(window, 'load', initialize);
 

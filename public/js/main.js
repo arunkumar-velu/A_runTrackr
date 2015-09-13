@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
- var socket = io();
+var socket = io();
 var map;
     var map_marker;
     var lat = null;
