@@ -88,22 +88,52 @@ var map;
           map_marker_from.setMap(map);
           map_marker_to.setMap(map);
            //$(".map-container").hide();
-           google.maps.event.addListener(map, 'click', function(event) {
-            //marker = new google.maps.Marker({position: event.latLng, map: map});
-            //redraw(event.latLng);
-          lat =  event.latLng.lat();
-          lng =  event.latLng.lng();
+        //    google.maps.event.addListener(map, 'click', function(event) {
+        //     //marker = new google.maps.Marker({position: event.latLng, map: map});
+        //     //redraw(event.latLng);
+        //   lat =  event.latLng.lat();
+        //   lng =  event.latLng.lng();
 
-          var moveData = { 
-            latLng : {
-              lat : lat,
-              lng : lng
-            },
-            room : window.currentRoom
-          }
-          console.log(window.currentRoom)
-            socket.emit('move', moveData);
-          });
+        //   var moveData = { 
+        //     latLng : {
+        //       lat : lat,
+        //       lng : lng
+        //     },
+        //     room : window.currentRoom
+        //   }
+        //   console.log(window.currentRoom)
+        //     socket.emit('move', moveData);
+        //   });
+        // }
+
+
+        // ###### Watch #####
+
+           function onSuccess(position) {
+               lat =  position.coords.latitude ;
+                         lng =  position.coords.longitude;
+                         var moveData = {
+                                     latLng : {
+                                       lat : lat,
+                                       lng : lng
+                                     },
+                                     room : window.currentRoom
+                                   }
+                                   console.log(window.currentRoom)
+                                     socket.emit('move', moveData);
+           }
+
+
+           function onError(error) {
+               alert('code: '    + error.code    + '\n' +
+                     'message: ' + error.message + '\n');
+           }
+
+
+           var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+
+
+           //#### end ######
         }
 
           // moves the marker and center of map
