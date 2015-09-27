@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var socket = io();
+ var socket = io();
 var map;
     var map_marker;
     var lat = null;
@@ -25,7 +25,7 @@ var map;
         var person = prompt("Please enter mail id", "");
         if (person != null) {
             socket.emit("addUser",person);
-            $(".user").html(person);
+            $(".user_name").html(person);
             var result = person.split("@")
              var val = {name: result[0],email: person};
             $.ajax({
@@ -185,7 +185,7 @@ var map;
         console.log($(this).data("old"),$(this).data("new"))
         socket.emit("leave room",$(this).data("old"));
         socket.emit("join room",$(this).data("new"));
-      $(".user").append(" tracks "+ selectedUserName);
-      $(".map-container").show();
+      $(".tracks_name").html(" tracks "+ selectedUserName);
+      initialize();
 
     })
