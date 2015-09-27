@@ -44,7 +44,13 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-    cordova.plugins.backgroundMode.enable();
+
+    document.addEventListener("backbutton", function(){
+        cordova.plugins.backgroundMode.enable();
+    }, false);
+    document.addEventListener("resume", function(){
+            cordova.plugins.backgroundMode.disable();
+        }, false);
 
     // Called when background mode has been activated
         cordova.plugins.backgroundMode.onactivate = function () {
@@ -53,40 +59,41 @@ var app = {
                 cordova.plugins.backgroundMode.configure({
                     text:'Geo Location is ON'
                 });
-                // ###### Watch #####
 
-                           function onSuccess(position) {
-                               lat =  position.coords.latitude ;
-                                         lng =  position.coords.longitude;
-                                         var moveData = {
-                                                     latLng : {
-                                                       lat : lat,
-                                                       lng : lng
-                                                     },
-                                                     room : window.currentRoom
-                                                   }
-                                                   console.log(window.currentRoom)
-                                                     socket.emit('move', moveData);
-                           }
-
-
-                           function onError(error) {
-                               alert('code: '    + error.code    + '\n' +
-                                     'message: ' + error.message + '\n');
-                           }
-
-
-                           var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
-
-
-                           //#### end ######
             }, 5000);
+             // ###### Watch #####
+
+                                       function onSuccess(position) {
+                                           lat =  position.coords.latitude ;
+                                                     lng =  position.coords.longitude;
+                                                     var moveData = {
+                                                                 latLng : {
+                                                                   lat : lat,
+                                                                   lng : lng
+                                                                 },
+                                                                 room : window.currentRoom
+                                                               }
+                                                               console.log(window.currentRoom)
+                                                                 socket.emit('move', moveData);
+                                       }
+
+
+                                       function onError(error) {
+                                           alert('code: '    + error.code    + '\n' +
+                                                 'message: ' + error.message + '\n');
+                                       }
+
+
+                                       var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+
+
+                                       //#### end ######
         }
         var parentElement = document.getElementById(id);
         var person = prompt("Please enter mail id", "");
                 if (person != null) {
                     socket.emit("addUser",person);
-                    $(".user").html(person);
+                    $(".user_name").html(person);
                     var result = person.split("@")
                      var val = {name: result[0],email: person};
                     $.ajax({
@@ -236,8 +243,8 @@ var app = {
             console.log($(this).data("old"),$(this).data("new"))
             socket.emit("leave room",$(this).data("old"));
             socket.emit("join room",$(this).data("new"));
-          $(".user").append(" tracks "+ selectedUserName);
-          $(".map-container").show();
+            $(".tracks_name").html(" tracks "+ selectedUserName);
+            initialize();
 
         })
 
