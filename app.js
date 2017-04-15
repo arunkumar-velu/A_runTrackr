@@ -19,10 +19,13 @@ var db = require('./db/db')
 app.get('/', function(req, res){
    res.sendFile(__dirname + '/public/view/index.html');
 });
-app.set('port', (process.env.PORT || 5000));
+app.get('/login', function(req, res){
+   res.sendFile(__dirname + '/public/view/login.html');
+});
+app.set('port', (process.env.PORT || 7000));
 app.use("/js", express.static(__dirname + '/public/js'));
+app.use("/lib", express.static(__dirname + '/public/lib'));
 app.use("/css", express.static(__dirname + '/public/css'));
-
 
 // Connection URL. This is where your mongodb server is running.
 var url = 'mongodb://arunmadcoder:test@ds035503.mongolab.com:35503/a_run_trackr';
@@ -33,7 +36,7 @@ db.connect(url, function(err) {
     process.exit(1)
   } else {
     http.listen(app.get('port'), function(){
-      console.log('listening on *:5000 ||',app.get('port'));
+      console.log('listening on *:7000 ||',app.get('port'));
     });
     }
 });

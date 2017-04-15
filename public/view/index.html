@@ -5,32 +5,43 @@
     <title>Google Maps Example</title>
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
+    <script type="text/javascript" src="//cdn.ably.io/lib/ably.min-1.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrg5FODahC0GtfKavkdkpKS8pLR3I8yog"></script>
+    <script src="lib/initial.min.js"></script>
+
   </head>
   <body>
-    <div class="container">
+    <header>
       <div class="a-title">
-       <h1>A_run Trackr</h1>
+       <h2>A run Trackr</h2>
       </div>
-      <div class = "a-header">
-        <div>
-          <h4 class="user"><span class = "user_name"></span><span class="tracks_name"></span></h4>
+      <div class="user-profile">
+        <div class="user-name">
+            <img class="profile img-rounded" >
+            <div>
+              <h4></h4> <span></span>
+            </div>
+            <div class="arrow"> ^ </div>
         </div>
-        <div>
-          <p>Select user u need to track</p>
-          <select id="username"> 
-            <option>...</option>
-          </select>
+        <div class="user-signout hide">
+          <p> sign out </p>
         </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class= "map-container">
+        <div id="map-canvas"></div>
+      </div>
+      <div class="users-container">
+        <ul>
+        </ul>
       </div>
     </div>
-    <div class= "map-container">
-      <div id="map-canvas"></div>test
-    </div>
+    
     
     <!-- Map Configuration and data -->
     <script src="js/main.js">

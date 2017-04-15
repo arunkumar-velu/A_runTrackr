@@ -1,11 +1,16 @@
  html, body, #map-canvas {
-        height: 700px;
+        height: 674px;
         margin: 0px;
         padding: 0px;
 
       }
       .a-title{
+        color: #ffffff;
         text-align: center;
+      }
+      .a-title h2{
+        margin-top: 4px;
+        margin-bottom: 4px;
       }
       .a-header div:first-child{
         float: left;
@@ -17,4 +22,107 @@
       .a-header div:last-child p{
             margin: 0 10px 0px 0px;
             display: inline-block;
+      }
+      .img-rounded{
+          border-radius: 24px;
+      }
+      .user-name{
+        cursor: pointer;
+      }
+      .user-name div h4{
+        margin: 0px;
+        color: #ffffff;
+      }
+      .user-name div span{
+        color: rgb(179, 178, 178);
+      }
+      .user-name div {
+        display: inline-block;
+      }
+      .user-name .profile{
+            vertical-align: bottom;
+      }
+      header .a-title, header .user-profile{
+        display: inline-block;
+        padding: 10px;
+      } 
+      header .user-profile{
+        float: right;
+      }
+      header .user-profile:hover{
+        background: #3f3f46;
+      }
+      header{
+        background: #303036;
+      }
+      .user-signout{
+        cursor: pointer;
+        width: 199px;
+        background: #333;
+        text-align: center;
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: 200;
+        border-bottom: 1px solid #555555;
+        position: absolute;
+        top: 60px;
+        right: -3px;
+      }
+      .user-signout:hover{
+        background: #3f3f46;
+      }
+      .user-signout p{
+        margin: 6px;
+      }
+      .container .map-container, .container .users-container{
+        display: inline-block;
+      }
+      .container .map-container{
+        width: 70%;
+        height: 674px
+      }
+      .container .users-container{
+        width: 26%;
+        height: 674px;
+        overflow: auto;
+        background: #303036;
+      }
+      .container .users-container ul{
+        margin: 0px;
+        padding: 0px;
+      }
+      .container .users-container ul li{
+        text-decoration: none;
+        width: 100%;
+        border-bottom: 1px solid #555555;
+        list-style: none;
+        color: #e0e0e0;
+        padding: 10px;
+      }
+      .container .users-container ul li:hover{
+        background: #3f3f46;
+      }
+      .container .users-container ul li p{
+        margin: 25px;
+      }
+      .users-container ul li .user-name h5{
+        margin: 0px;
+      }
+      .users-container ul li .user-name .profile{
+        margin-right: 8px;
+      }
+      header .arrow{
+        -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
+        -moz-transform: rotate(180deg);        /* FF */
+        -o-transform: rotate(180deg);          /* Opera */
+        -ms-transform: rotate(180deg);         /* IE9 */
+        transform: rotate(180deg);
+        display: block;
+        float: right;
+        margin: 10px;
+        color: #bbb;
+        font-size: smaller;
+      }
+      .active{
+        background: #3f3f46;
       }

@@ -1,0 +1,35 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>A_run Trackr Login</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="form">
+        <div class="register-form">
+          <p class="error hide"> Email is Already Exit <p>
+          <input type="text" placeholder="Name" name="name"/>
+          <input type="text" placeholder="Email" name="email"/>
+          <input type="password" placeholder="Password" name="password"/>
+          <button id="signUp">Create</button>
+          <p class="message">Already registered? <a href="#">Sign In</a></p>
+        </div>
+        <div class="login-form">
+          <p class="error hide"><p>
+          <input type="text" placeholder="Email" name="email"/>
+          <input type="password" placeholder="Password" name="password"/>
+          <button id="login">login</button>
+          <p class="message">Not registered? <a href="#">Create an account</a></p>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/login.js"></script>
+  </body>
+</html>
