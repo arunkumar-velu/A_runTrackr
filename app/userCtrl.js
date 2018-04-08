@@ -40,7 +40,7 @@ var UserController = function(app){
 	
  	app.get('/users', function(req, res) {
  		var collection = db.get().collection('userslist')	
-	  collection.find().toArray(function(err, docs) {
+	  collection.find({},{password: 0}).toArray(function(err, docs) {
 	  	console.log(err,docs)
 	    res.send(docs)
 	  });

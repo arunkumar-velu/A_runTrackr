@@ -24,6 +24,7 @@ app.get('/login', function(req, res){
 });
 app.set('port', (process.env.PORT || 7000));
 app.use("/js", express.static(__dirname + '/public/js'));
+app.use("/assests/js", express.static(__dirname + '/assests/js'));
 app.use("/lib", express.static(__dirname + '/public/lib'));
 app.use("/css", express.static(__dirname + '/public/css'));
 
