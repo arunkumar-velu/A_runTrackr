@@ -12,7 +12,7 @@ export default {
               break;
             case error.PERMISSION_DENIED:
               if(error.message.indexOf("Only secure origins are allowed") == 0) {
-                jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
+                jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCrg5FODahC0GtfKavkdkpKS8pLR3I8yog", function(success) {
                   cb({lat: success.location.lat, lng: success.location.lng});
                 })
                 .fail(function(err) {
