@@ -1,10 +1,11 @@
-import Ably from './realtimesocket/ably';
 import User from './user';
-import GeoHelper from './helpers/geoHelper'
+import RealTime from './realtime/realtime';
+import GeoHelper from './helpers/geoHelper';
 export default {
   lineCoordinatesArray: [],
   init(){
-    Ably.init();
+    window.isAbly = true;
+    RealTime.init();
     User.init();
     GeoHelper.currentLocation((geoInfo) => {
       if(geoInfo){
@@ -42,7 +43,7 @@ export default {
       console.log(window.at.currentRoom)
       this.map.setCenter({lat: lat, lng : lng, alt: 0});
       this.map_marker_to.setPosition({lat: lat, lng : lng, alt: 0});
-      Ably.publishToMove(window.at.currentRoom, moveData)
+      RealTime.platForm.publishToMove(window.at.currentRoom, moveData);
     });
   },
   addWatchToPosition(){
@@ -57,11 +58,11 @@ export default {
         room : window.at.currentRoom
       }
       console.log(window.at.currentRoom)
-      Ably.publishToMove(window.at.currentRoom, moveData)
+      RealTime.platForm.publishToMove(window.at.currentRoom, moveData);
     }, function (error) {
       console.log('code: '    + error.code    + '\n' +
          'message: ' + error.message + '\n');
-    }, { timeout: 30000 });
+    }, { timeout: 20000 });
   },
   redraw(latLng){
     let lat = latLng.lat;

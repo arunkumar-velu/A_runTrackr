@@ -9,6 +9,13 @@ export default {
           switch (error.code) {
             case error.TIMEOUT:
               console.log("Browser geolocation error !\n\nTimeout.");
+              jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCrg5FODahC0GtfKavkdkpKS8pLR3I8yog", function(success) {
+                cb({lat: success.location.lat, lng: success.location.lng});
+              })
+              .fail(function(err) {
+                console.log("API Geolocation error! \n\n"+err);
+                cb(null);
+              });
               break;
             case error.PERMISSION_DENIED:
               if(error.message.indexOf("Only secure origins are allowed") == 0) {

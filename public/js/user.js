@@ -1,4 +1,6 @@
-import Ably from './realtimesocket/ably';
+import Geo from "./geo";
+import RealTime from './realtime/realtime';
+
 export default {
   init(){
     this.getCurrentUser();
@@ -39,15 +41,32 @@ export default {
     $(".user-profile").click(this.showProfileOptions);
     $(".user-signout").click(this.onSignOut);
   },
+  updateUser(user) {
+    console.log("user",user)
+    $(".users-container ul").empty();
+    let users = user.data ? user.data : user;
+    $.each(users, function(index,val){
+      console.log("user",val.name)
+      $(".users-container ul").append("<li email="+val.email+"><div class='user-name'><img class='profile img-rounded' ><div><h5>"+val.name+"</h5> <span>"+val.email+"</span></div></div></li>");
+      $('.users-container ul li:last img').initial({name: val.name, height: 40, width: 40, charCount: 1, fontSize: 18, fontWeight:400});
+    })
+    $(".users-container ul li").on('click', function(){
+      var email = $(this).attr("email");
+      $(".users-container ul li").removeClass("active");
+      $(this).addClass("active");
+      RealTime.platForm.subscribeToMove(email);
+      // TODO need to reset the map on user selection
+      // Geo.init();
+    })
+  },
   onUserSelect(event){
     var selectedUser = $("#username option:selected").val();
     var selectedUserName = $("#username option:selected").text();
-      $(this).data("old", $(this).data("new") || "");
-      $(this).data("new", $(this).val());
-      console.log($(this).data("old"),$(this).data("new"))
+    $(this).data("old", $(this).data("new") || "");
+    $(this).data("new", $(this).val());
+    console.log($(this).data("old"),$(this).data("new"))
     $(".tracks_name").html(" tracks "+ selectedUserName);
-    var channel = ably.channels.get('gps:'+selectedUser);
-    Ably.subscribeToMove(selectedUser);
+    RealTime.platForm.subscribeToMove(selectedUser);
     // initialize();
   },
   showProfileOptions(){

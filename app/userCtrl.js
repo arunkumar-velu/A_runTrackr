@@ -68,7 +68,6 @@ var UserController = function(app){
   app.get("/current_user", function(req, res){
   	var collection = db.get().collection('userslist')	
 	  collection.find({"token": getCookie(req.headers.cookie, 'a_run_trackr')}).toArray(function(err, docs) {
-	  	console.log(err,docs)
 	  	if(docs.length){
 		    res.status(200).json({"success":"true","data": docs[0]});
 		}else{
@@ -95,11 +94,10 @@ var UserController = function(app){
   });
    
 
-   app.post('/sign_out', function(req, res) {
-   		console.log("ssuccesss")
- 		res.cookie('a_run_trackr=;expires=Thu, 01 Jan 1970 00:00:01 GMT;');
- 		res.status(200).json({"success":"true"});
-   });
+  app.post('/sign_out', function(req, res) {
+  	res.cookie('a_run_trackr=;expires=Thu, 01 Jan 1970 00:00:01 GMT;');
+  	res.status(200).json({"success":"true"});
+  });
 
 }
 module.exports = UserController;
