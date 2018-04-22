@@ -67,7 +67,7 @@ var UserController = function(app){
 
   app.get("/current_user", function(req, res){
   	var collection = db.get().collection('userslist')	
-	  collection.find({"token": getCookie(req.headers.cookie, 'a_run_trackr')}).toArray(function(err, docs) {
+	  collection.find({"token": getCookie(req.headers.cookie, 'a_run_trackr')},{password: 0}).toArray(function(err, docs) {
 	  	if(docs.length){
 		    res.status(200).json({"success":"true","data": docs[0]});
 		}else{

@@ -5,6 +5,7 @@ export default {
   init(){
     this.getCurrentUser();
     this.addListeners();
+    window.at.currentUser = {};
   },
   getUsers(cb){
     $.ajax({
@@ -27,10 +28,11 @@ export default {
     .done(function( result ) {
       var room = result.data.email;
       window.at.currentRoom = room;
-      window.at.currentUser = result.data;
+      window.at.currentUser.info = result.data;
       $('.user-name img').initial({name: window.at.currentUser.name, height: 40, width: 40, charCount: 1, fontSize: 18, fontWeight:400});
-      $(".user-name h4").html(window.at.currentUser.name);
-      $(".user-name span").html(window.at.currentUser.email);
+      $(".user-name h4").html(window.at.currentUser.info.name);
+      $(".user-name span").html(window.at.currentUser.info.email);
+      RealTime.platForm.subToPrivateChannel(result.data.email);
     })
     .fail(function(err){
       window.location = "/login"
@@ -42,7 +44,8 @@ export default {
     $(".user-signout").click(this.onSignOut);
   },
   updateUser(user) {
-    console.log("user",user)
+    console.log("user",user);
+    let currentUser = window.at.currentUser;
     $(".users-container ul").empty();
     let users = user.data ? user.data : user;
     $.each(users, function(index,val){
@@ -55,9 +58,34 @@ export default {
       $(".users-container ul li").removeClass("active");
       $(this).addClass("active");
       RealTime.platForm.subscribeToMove(email);
+      RealTime.platForm.pubToPrivateChannel(email, {event: 'getSelectedUserInfo', from: currentUser.info.email});
       // TODO need to reset the map on user selection
-      // Geo.init();
     })
+  },
+
+  setLatLng(latLng){
+    window.at.currentUser.latLng = latLng;
+  },
+
+  onMessage(payload){
+    let actualPayload = payload.data ? payload.data : payload;
+    if(actualPayload){
+      let event = actualPayload.event;
+      let to = actualPayload.from;
+      switch(event){
+        case 'getSelectedUserInfo':
+          RealTime.platForm.pubToPrivateChannel(to, 
+          {
+            event: 'selectedUserInfo', 
+            from: window.at.currentUser.info.email, 
+            user: window.at.currentUser
+          });
+          break;
+        case 'selectedUserInfo':
+          Geo.updateLatlng(actualPayload.user);
+          break;
+      }
+    }
   },
   onUserSelect(event){
     var selectedUser = $("#username option:selected").val();
@@ -67,7 +95,6 @@ export default {
     console.log($(this).data("old"),$(this).data("new"))
     $(".tracks_name").html(" tracks "+ selectedUserName);
     RealTime.platForm.subscribeToMove(selectedUser);
-    // initialize();
   },
   showProfileOptions(){
     $(".user-signout").toggleClass("hide");

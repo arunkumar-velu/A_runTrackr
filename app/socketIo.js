@@ -9,8 +9,14 @@ var socketIo = function(io,user){
     socket.on('move', function(email, payload){
       io.to('gps:'+email).emit('move', payload);
     });
-    socket.on('join channel', function(email){
+    socket.on('messageToUser', function(email, payload){
+      io.to('private:'+email).emit('messageToUser', payload);
+    });
+    socket.on('join_user_channel', function(email){
       socket.join('gps:'+email);
+    }),
+    socket.on('join_private_channel', function(email){
+      socket.join('private:'+email);
     })
   });
 }
